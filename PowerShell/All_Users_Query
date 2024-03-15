@@ -1,0 +1,35 @@
+# Import the Active Directory module
+Import-Module ActiveDirectory
+
+# Specify the domain name
+$domain = "Lockton.com"
+
+# Get all users in the domain and retrieve all attributes
+$users = Get-ADUser -Filter * -Property * -Server $domain
+
+# Initialize an array to store the user data
+$userData = @()
+
+# Iterate through each user
+foreach ($user in $users) {
+    # Retrieve the user's member groups
+    $memberOf = ($user | Get-ADPrincipalGroupMembership).Name -join ', '
+
+    # Create a hashtable to store user properties and their values
+    $userProperties = @{}
+
+    # Iterate through each property of the user
+    foreach ($property in $user.PSObject.Properties) {
+        # Add property name and value to the hashtable
+        $userProperties[$property.Name] = $property.Value
+    }
+
+    # Add the 'MemberOf' attribute
+    $userProperties['MemberOf'] = $memberOf
+
+    # Add the user properties hashtable to the user data array
+    $userData += [PSCustomObject]$userProperties
+}
+
+# Export the user data to a CSV file for further analysis
+$userData | Export-Csv -Path "Denton_AD_users.csv" -NoTypeInformation
