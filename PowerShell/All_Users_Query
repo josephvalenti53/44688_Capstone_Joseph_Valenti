@@ -1,3 +1,8 @@
+# The AD account running the below query must have the following accesses to be successful: 
+# AD account is logged into Denton's or audited company's network
+# AD account has access to PowerShell.exe
+# AD account is granted full-read permissions to ADUC (Active Directory Users & Computers)
+
 # Import the Active Directory module
 Import-Module ActiveDirectory
 
