@@ -6,8 +6,8 @@
 # Import the Active Directory module
 Import-Module ActiveDirectory
 
-# Specify the domain name
-$domain = "Lockton.com"
+# Specify the Active Directory domain name
+$domain = "US.Denton.com"
 
 # Get all users in the domain and retrieve all attributes
 $users = Get-ADUser -Filter * -Property * -Server $domain
