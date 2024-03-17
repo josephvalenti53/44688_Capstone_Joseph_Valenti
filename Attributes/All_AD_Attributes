@@ -1,0 +1,145 @@
+The AD Attribute Name, Description of the Attribute, the Attribute's datatype, and scrubbed example of what the attribute looks like after being pulled from PowerShell
+
+| Attribute Name                      | Description                                   | Syntax            | Example                                      |
+|-------------------------------------|-----------------------------------------------|-------------------|----------------------------------------------|
+| AccountExpirationDate               | Account expiration date                       | datetime          | 9.22010O+03                                  |
+| accountExpires                      | Account expiration date                       | datetime          | 9.22010O+03                                  |
+| AccountLockoutTime                  | Account lockout time                          | datetime          |                                              |
+| AccountNotDelegated                 | Indicates whether the account is not delegated| boolean           | FALSE                                        |
+| AllowReversiblePasswordEncryption   | Allow reversible password encryption          | boolean           | FALSE                                        |
+| AuthenticationPolicy                | Authentication policy                         | string            | Margarite.XchlqfOwxsnmopk.Management.LKXmfeugkqItcfiEqruuwvlwi |
+| AuthenticationPolicySilo            | Authentication policy silo                    | string            | Margarite.XchlqfOwxsnmopk.Management.LKXmfeugkqItcfiEqruuwvlwi |
+| BadLogonCount                       | Bad logon count                               | integer           | 0                                            |
+| c                                   | Country                                       | string            | US                                           |
+| CannotChangePassword                | Indicates whether the password cannot be changed | boolean        | FALSE                                        |
+| CanonicalName                       | Canonical name                                | string            | nickole.com/giuseppina/Roberto, Brooke      |
+| Certificates                        | Certificates                                  | binary            | Margarite.XchlqfOwxsnmopk.Management.LKXmfeugkqItcfiEqruuwvlwi |
+| City                                | City                                          | string            | Roberto, Brooke                              |
+| CN                                  | Common name (CN)                              | string            | United States                                |
+| co                                  | Country                                       | string            | US                                           |
+| codePage                            | Code page                                     | integer           | 400                                          |
+| Company                             | Company                                       | string            | 2/9/1000 11:07                               |
+| CompoundIdentitySupported           | Indicates whether compound identity is supported | boolean        | 2/9/1000 11:07                               |
+| Country                             | Country                                       | string            | United States                                |
+| countryCode                         | Country code                                  | integer           | 0                                            |
+| Created                             | Date and time when the object was created     | datetime          | The Center                                   |
+| createTimeStamp                     | Create time stamp                             | datetime          | United States                                |
+| Deleted                             | Date and time when the object was deleted     | datetime          | 0                                            |
+| Department                          | Department                                    | string            | 1.02231V+14                                  |
+| Description                         | Description                                   | string            | 3/03/1000 00:16                              |
+| DisplayName                         | Display name                                  | string            | 1.3142G+14                                  |
+| DistinguishedName                   | Distinguished name                            | string            | /o=Nickole Companies/tk=External (OLEVHPKO10JMVOF)/zz=Recipients/zz=u22ww600115p1t340415p4r1ah2a34rw-Lanita |
+| Division                            | Division                                      | string            | FALSE                                        |
+| DoesNotRequirePreAuth               | Whether pre-authentication is not required    | boolean           | 20                                           |
+| dSCorePropagationData               | DS core propagation data                      | datetime array    | Brooke.Roberto@nickole.com                  |
+| EmailAddress                        | Email address                                 | string            | Brooke.Roberto@nickole.com                  |
+| EmployeeID                          | Employee ID                                   | string            | FALSE                                        |
+| EmployeeNumber                      | Employee number                               | string            | FALSE                                        |
+| Enabled                             | Indicates whether the account is enabled      | boolean           | FALSE                                        |
+| Fax                                 | Fax number                                    | string            | 2/12/1000 10:16                              |
+| garbageCollPeriod                   | Garbage collection period                     | timespan          | FALSE                                        |
+| GivenName                           | Given name                                    | string            | FALSE                                        |
+| HomeDirectory                       | Home directory                                | string            | FALSE                                        |
+| HomedirRequired                     | Indicates whether a home directory is required | boolean          | 401                                          |
+| HomeDrive                           | Home drive                                    | string            | FALSE                                        |
+| HomePage                            | Home page                                     | string            | FALSE                                        |
+| HomePhone                           | Home phone number                             | string            | Margarite.XchlqfOwxsnmopk.Management.LKXmfeugkqItcfiEqruuwvlwi |
+| Initials                            | Initials                                      | string            | FALSE                                        |
+| instanceType                        | Instance type                                 | integer           | US                                           |
+| internetEncoding                    | Internet encoding                             | integer           | FALSE                                        |
+| isDeleted                           | Indicates whether the object is deleted       | boolean           | FALSE                                        |
+| KerberosEncryptionType              | Kerberos encryption type                      | integer           | FALSE                                        |
+| LastBadPasswordAttempt              | Date and time of last bad password attempt    | datetime          | FALSE                                        |
+| LastKnownParent                     | Last known parent                             | string            | 1                                            |
+| lastLogon                           | Last logon                                    | datetime          | FALSE                                        |
+| LastLogonDate                       | Last logon date                               | datetime          | FALSE                                        |
+| lastLogonTimestamp                  | Last logon timestamp                          | datetime          | Margarite.XchlqfOwxsnmopk.Management.LKXmfeugkqItcfiEqruuwvlwi |
+| legacyExchangeDN                    | Legacy Exchange distinguished name            | string            | FALSE                                        |
+| LockedOut                           | Indicates whether the account is locked out   | boolean           | 3/03/1000 00:16                              |
+| logonCount                          | Logon count                                   | integer           | FALSE                                        |
+| LogonWorkstations                   | Logon workstations                            | string            | FALSE                                        |
+| mail                                | Email address                                 | string            | FALSE                                        |
+| mailNickname                        | Mail nickname                                 | string            | FALSE                                        |
+| Manager                             | Manager                                       | string            | FALSE                                        |
+| MemberOf                            | Member of groups                              | string array      | FALSE                                        |
+| MNSLogonAccount                     | MNS logon account                             | string            | FALSE                                        |
+| MobilePhone                         | Mobile phone number                           | string            | FALSE                                        |
+| Modified                            | Date and time when the object was modified    | datetime          | FALSE                                        |
+| modifyTimeStamp                     | Modify time stamp                             | datetime          | FALSE                                        |
+| mS-DS-ConsistencyGuid               | Microsoft DS consistency GUID                 | string            | FALSE                                        |
+| msDS-ExternalDirectoryObjectId      | External directory object ID                  | string            | FALSE                                        |
+| msDS-preferredDataLocation          | Preferred data location                       | string            | FALSE                                        |
+| msDS-User-Account-Control-Computed  | Computed user account control                 | integer           | FALSE                                        |
+| msExchAddressBookFlags              | Exchange address book flags                   | integer           | FALSE                                        |
+| msExchArchiveQuota                  | Exchange archive quota                        | integer           | FALSE                                        |
+| msExchArchiveWarnQuota              | Exchange archive warning quota                | integer           | FALSE                                        |
+| msExchBypassAudit                   | Exchange bypass audit                         | boolean           | FALSE                                        |
+| msExchCalendarLoggingQuota          | Exchange calendar logging quota               | integer           | FALSE                                        |
+| msExchDumpsterQuota                 | Exchange dumpster quota                       | integer           | FALSE                                        |
+| msExchDumpsterWarningQuota          | Exchange dumpster warning quota               | integer           | FALSE                                        |
+| msExchMailboxAuditEnable            | Enable mailbox audit                          | boolean           | FALSE                                        |
+| msExchMailboxAuditLogAgeLimit       | Mailbox audit log age limit                   | integer           | FALSE                                        |
+| msExchMDBRulesQuota                 | Exchange mailbox database rules quota         | integer           | FALSE                                        |
+| msExchModerationFlags               | Exchange moderation flags                     | integer           | FALSE                                        |
+| msExchPoliciesExcluded              | Exchange policies excluded                    | string array      | FALSE                                        |
+| msExchProvisioningFlags             | Exchange provisioning flags                   | integer           | FALSE                                        |
+| msExchRecipientDisplayType          | Exchange recipient display type               | integer           | FALSE                                        |
+| msExchRecipientSoftDeletedStatus    | Exchange recipient soft deleted status        | boolean           | FALSE                                        |
+| msExchRecipientTypeDetails          | Exchange recipient type details               | integer           | FALSE                                        |
+| msExchRemoteRecipientType           | Exchange remote recipient type                | integer           | FALSE                                        |
+| msExchTransportRecipientSettingsFlags | Exchange transport recipient settings flags | integer           | FALSE                                        |
+| msExchUMDtmfMap                     | Exchange UM DTMF map                          | string            | FALSE                                        |
+| msExchUMEnabledFlags2               | Exchange UM enabled flags 2                   | integer           | FALSE                                        |
+| msExchUsageLocation                 | Exchange usage location                       | string            | FALSE                                        |
+| msExchUserAccountControl            | Exchange user account control                 | integer           | FALSE                                        |
+| msExchVersion                       | Exchange version                              | string            | FALSE                                        |
+| Name                                | Name                                          | string            | FALSE                                        |
+| nTSecurityDescriptor                | Security descriptor                           | binary            | FALSE                                        |
+| ObjectCategory                      | Object category                               | string            | FALSE                                        |
+| ObjectClass                         | Object class                                  | string            | FALSE                                        |
+| ObjectGUID                          | Object GUID                                   | string            | FALSE                                        |
+| objectSid                           | Object SID                                    | string            | FALSE                                        |
+| Office                              | Office                                        | string            | FALSE                                        |
+| OfficePhone                         | Office phone number                           | string            | FALSE                                        |
+| Organization                        | Organization                                  | string            | FALSE                                        |
+| OtherName                           | Other name                                    | string            | FALSE                                        |
+| PasswordExpired                     | Indicates whether the password has expired    | boolean           | FALSE                                        |
+| PasswordLastSet                     | Date and time when the password was last set  | datetime          | FALSE                                        |
+| PasswordNeverExpires                | Indicates whether the password never expires  | boolean           | FALSE                                        |
+| PasswordNotRequired                 | Indicates whether a password is not required  | boolean           | FALSE                                        |
+| physicalDeliveryOfficeName          | Physical delivery office name                 | string            | FALSE                                        |
+| POBox                               | Post Office box                               | string            | FALSE                                        |
+| PostalCode                          | Postal code                                   | string            | FALSE                                        |
+| PrimaryGroup                        | Primary group                                 | string            | FALSE                                        |
+| primaryGroupID                      | Primary group ID                              | integer           | FALSE                                        |
+| PrincipalsAllowedToDelegateToAccount| Principals allowed to delegate to account     | string array      | FALSE                                        |
+| ProfilePath                         | Profile path                                  | string            | FALSE                                        |
+| ProtectedFromAccidentalDeletion     | Whether obj is protected accd' deletion       | boolean           | FALSE                                        |
+| protocolSettings                    | Protocol settings                             | string            | FALSE                                        |
+| proxyAddresses                      | Proxy addresses                               | string array      | FALSE                                        |
+| pwdLastSet                          | Password last set                             | datetime          | FALSE                                        |
+| SamAccountName                      | SAM account name                              | string            | FALSE                                        |
+| sAMAccountType                      | SAM account type                              | integer           | FALSE                                        |
+| ScriptPath                          | Script path                                   | string            | FALSE                                        |
+| sDRightsEffective                   | Effective security descriptor rights          | integer           | FALSE                                        |
+| ServicePrincipalNames               | Service principal names                       | string array      | FALSE                                        |
+| showInAddressBook                   | Show in address book                          | boolean           | FALSE                                        |
+| SID                                 | Security identifier (SID)                     | string            | FALSE                                        |
+| SIDHistory                          | SID history                                   | string array      | FALSE                                        |
+| SmartcardLogonRequired              | Indicates whether smart card logon is required | boolean          | FALSE                                        |
+| sn                                  | Surname                                       | string            | FALSE                                        |
+| State                               | State                                         | string            | FALSE                                        |
+| StreetAddress                       | Street address                                | string            | FALSE                                        |
+| Surname                             | Surname                                       | string            | FALSE                                        |
+| targetAddress                       | Target address                                | string            | FALSE                                        |
+| Title                               | Title                                         | string            | FALSE                                        |
+| TrustedForDelegation                | Whether object is trusted for delegation      | boolean           | FALSE                                        |
+| TrustedToAuthForDelegation          | Whether object is trusted for delegation auth | boolean           | FALSE                                        |
+| UseDESKeyOnly                       | Indicates whether to use only DES key         | boolean           | FALSE                                        |
+| userAccountControl                  | User account control                          | integer           | FALSE                                        |
+| userCertificate                     | User certificate                              | binary            | FALSE                                        |
+| UserPrincipalName                   | User principal name                           | string            | FALSE                                        |
+| uSNChanged                          | USN changed                                   | integer           | FALSE                                        |
+| uSNCreated                          | USN created                                   | integer           | FALSE                                        |
+| whenChanged                         | When changed                                  | datetime          | FALSE                                        |
+| whenCreated                         | When created                                  | datetime          | FALSE                                        |
