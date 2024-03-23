@@ -1,0 +1,88 @@
+###Cleanup: The SPL (Search Processing Language) below manipulates the raw, .csv data into meaningful fields with fieldnames more easily understood by the audience.  
+###Timestamps: The SPL creates additional fields to categorize timestamps and determine whether the age of the timestamps warrants remediation.
+###Regex: Fields containing hectic values are maniuplated in the 'rex' command and uneccesary characters are removed
+
+| inputlookup Denton_AD_users.csv
+```^^^semi-cleaned raw user data saved in the Splunk UI as a .csv file```
+
+```Evaluation of PasswordLastSet to Current Date - ncessary to see the age of the password```
+| eval epochDate1=strptime(PasswordLastSet, "%m/%d/%Y %H:%M")
+| eval cDate=now()
+| eval cFormat=strftime(cDate,"%m/%d/%Y %H:%M")
+| eval PwdLastSet_DaysDiff = round((cDate - epochDate1)/86400)
+
+```Evaluation of LastLogonDate to Current Date - necessary to see how long it has been since the user last logged in```
+| eval epochDate2=strptime(LastLogonDate, "%m/%d/%Y %H:%M")
+| eval cDate=now()
+| eval cFormat=strftime(cDate,"%m/%d/%Y %H:%M")
+| eval LastLogon_DaysDiff = round((cDate - epochDate2)/86400)
+
+```Regex to clean timestamp values - necessary to change the format of the time, this helps makes the timestamp look 'prettier'```
+| rex field=LastLogonDate "(?<LastLogonDate>\d{1,2}\/\d{1,2}\/\d{4}) \d{1,2}:\d{2}"
+| rex field=PasswordLastSet "(?<PasswordLastSet>\d{1,2}\/\d{1,2}\/\d{4}) \d{1,2}:\d{2}"
+
+```Regex to clean MemberOf (Groups) - necessary in cleaning up the Microsoft verbiage and group dN (distinguishedName) so all that remains is the name of the group tied to the user's account```
+| rex field=MemberOf max_match=0 "RP=(?<MemberOf>[^,$]*[,]*[^,$]*")
+| rex field=MemberOf mode=sed "s/,(RP|ZW)=[^,$]*//g"
+
+```Regex to clean the user's Manager - necessary because the 'Manager' value is published as the Manager's identity displaying as a dN (distinguishedName), this clarifies who the user's manager is more legibly```
+| rex field=Manager max_match=0 "RP=(?<Manager>[^,$]*[,]*[^,$]*")
+| rex field=Manager mode=sed "s/\\\\//g"
+
+```Regex to clean the user's DN (DistinguishedName) - necessary in understanding where in Denton's Active Directory instance accounts are located, also helps define a user's operating purpose, use-case```
+| rex field=CanonicalName "\/(?<CanonicalName>[^\/]+)\/"
+
+```Eval for Expired Password - simple eval to categorize whether a pwd is expired in a yes/no category```
+| eval pwdStatus = if(PwdLastSet_DaysDiff > 90, "Expired", "Valid")
+
+```Eval for Dormant Users - if the user has not logged on since 30 days from the current date the account is considered Dormant or 'not in use'```
+| eval logonStatus = if(LastLogon_DaysDiff > 90, "Dormant", "Valid")
+
+```Order of fields to be displayed in Splunk```
+| table
+ObjectClass
+Enabled 
+userAccountControl
+adminCount
+SamAccountName
+EmailAddress
+DisplayName
+Department
+Description
+Title
+Company
+physicalDeliveryOfficeName
+DistinguishedName
+LastLogonDate
+LastLogon_DaysDiff
+logonCount
+isCriticalSystemObject
+LockedOut
+Manager
+MemberOf
+PasswordLastSet
+PwdLastSet_DaysDiff
+PasswordNeverExpires
+PasswordNotRequired
+CannotChangePassword
+primaryGroupID
+
+```Command to rename the designated fields from the CSV to a more audience friendly, understanding name```
+| rename
+adminCount as "Privileged",
+CN as CommonName,
+CanonicalName as OU
+physicalDeliveryOfficeName as Office,
+SamAccountName as identity,
+userAccountControl as Status
+
+```Command to 'swap' values found in the fieldname 'userAccountControl'```
+| replace 
+"16843264" with "Enabled, PwdNeverExpire, Trusted for Delegation"
+"2080" with "Disabled"
+"512" with "Enabled"
+"514" with "Disabled"
+"546" with "Enabled, PwdNotRequired"
+"590336" with "Enabled, PwdNeverExpire, Trusted for Delegation"
+"66048" with "Enabled, LockedOut"
+"66050" with "Disbled, LockedOut"
