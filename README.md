@@ -17,5 +17,9 @@ With this Splunk Enterprise instance, we'll evaluate, hunt in the SPL (search pr
 - Enabled Users created over one year ago and have never logged in
 - Enabled Users who have access (memberOf) to Domain Admin & Enterprise Admin and drilling down into their specific vulnerabilities
 
+# Attributes
+
+This folder explains all AD attributes pulled for each user/identity employed at Denton Insurance, or if a service user (non-human identity) exisiting.  Of these 141 initial attributes, 30 are necessary in evaluating Denton's Identity & Priviliged Access Management governance and risk.  
+
 # Overleaf Document
 https://www.overleaf.com/read/zzqpmvmrzmbc#653a71
