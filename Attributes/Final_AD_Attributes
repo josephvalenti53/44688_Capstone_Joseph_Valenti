@@ -1,0 +1,30 @@
+From the 141 AD (Active Directory) attributes pulled in the beginning, these 26 attributes are retained for the final 'cleaned' data and analysis in Splunk
+
+| Attribute Name              | Description                                   | Syntax    | Example                                      |
+|-----------------------------|-----------------------------------------------|-----------|----------------------------------------------|
+| ObjectClass                 | Object class of the AD object                 | string    | user                                         |
+| Enabled                     | Indicates whether the account is enabled      | boolean   | TRUE                                         |
+| userAccountControl          | User account control flags                    | integer   | 66048                                        |
+| adminCount                  | Indicates if the account has admin rights     | integer   | 1                                            |
+| SamAccountName              | SAM account name                              | string    | johndoe                                      |
+| EmailAddress                | Email address associated with the account     | string    | johndoe@example.com                          |
+| DisplayName                 | Display name of the user                      | string    | John Doe                                     |
+| Department                  | Department associated with the user           | string    | IT                                           |
+| Description                 | Description of the user                       | string    | IT Administrator                             |
+| Title                       | Job title of the user                         | string    | Systems Administrator                        |
+| Company                     | Company name associated with the user         | string    | Example Corp                                 |
+| physicalDeliveryOfficeName  | Office name or location                       | string    | Building A, Room 101                         |
+| DistinguishedName           | Distinguished name of the AD object           | string    | CN=John Doe,OU=Users,DC=example,DC=com      |
+| LastLogonDate               | Date and time of last logon                   | datetime  | 2023-01-15T08:30:00.000Z                    |
+| LastLogon_DaysDiff          | Days since last logon                         | integer   | 7                                            |
+| logonCount                  | Number of times the user has logged in        | integer   | 100                                          |
+| isCriticalSystemObject      | Indicates if the object is critical           | boolean   | FALSE                                        |
+| LockedOut                   | Indicates if the account is locked out        | boolean   | TRUE                                         |
+| Manager                     | Manager of the user                           | string    | CN=Jane Smith,OU=Managers,DC=example,DC=com |
+| MemberOf                    | Groups the user is a member of                | multivalue| Domain Users, IT Staff                       |
+| PasswordLastSet             | Date and time when password was last set      | datetime  | 2023-01-01T12:00:00.000Z                    |
+| PwdLastSet_DaysDiff         | Days since password was last set              | integer   | 30                                           |
+| PasswordNeverExpires        | Indicates if password expiration is disabled  | boolean   | FALSE                                        |
+| PasswordNotRequired         | Indicates if a password is not required       | boolean   | TRUE                                         |
+| CannotChangePassword        | Indicates if the user cannot change password  | boolean   | FALSE                                        |
+| primaryGroupID              | ID of the primary group of the user           | integer   | 513                                          |
