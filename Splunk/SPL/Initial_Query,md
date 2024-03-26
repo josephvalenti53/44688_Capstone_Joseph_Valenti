@@ -40,7 +40,7 @@ After running this query, the results were saved to a file named Denton_AD_Final
 ```Evals to calculate RS (Risk Score)```
 | eval RS_Enabled = if(Enabled=TRUE, "2","1")
 | eval RS_Privleged = if(adminCount=1, "5","1")
-| eval RS_Email = if(EmailAddress="*", "2","1")
+| eval RS_Email = if(EmailAddress like "%denton%", "2","1")
 | eval RS_Logon_Status = if(logonStatus="Dormant", "2", "1")
 | eval RS_Pwd_Status = if(pwdStatus="Expired", "2", "1")
 | eval RS_Enterprise_Admin=if(MemberOf like "%Enterprise Marita%", "1" , "0")
@@ -51,44 +51,42 @@ After running this query, the results were saved to a file named Denton_AD_Final
 | rex field=MemberOf max_match=0 "RP=(?<MemberOf>[^,$]*[,]*[^,$]*")
 | rex field=MemberOf mode=sed "s/,(RP|ZW)=[^,$]*//g"
 
-| table 
+| table
 ObjectClass 
-Enabled
 userAccountControl
-adminCount
 SamAccountName
-EmailAddress
 DisplayName
+Title
+physicalDeliveryOfficeName
 Department
 Description
-Title
 Company
-physicalDeliveryOfficeName
-DistinguishedName
+Risk_Score
+Enabled
+RS_Enabled
+EmailAddress
+RS_Email
+adminCount
+RS_Privleged
+logonCount
 LastLogonDate
 LastLogon_DaysDiff
 logonStatus
-logonCount
-isCriticalSystemObject
-LockedOut
-Manager
-MemberOf
+RS_Logon_Status
 PasswordLastSet
 PwdLastSet_DaysDiff
+pwdStatus
+RS_Pwd_Status
 PasswordNeverExpires
 PasswordNotRequired
 CannotChangePassword
-primaryGroupID
-
-```The below fields are reserved for the RS (Risk Score Functions)```
-RS_Email
-RS_Enabled
-RS_Privleged
-RS_Logon_Status
-RS_Pwd_Status
 RS_Enterprise_Admin
 RS_Domain_Admin
-Risk_Score
+MemberOf
+DistinguishedName
+isCriticalSystemObject
+LockedOut
+primaryGroupID
 
 ```Field names renamed```
 | rename
