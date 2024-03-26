@@ -17,14 +17,14 @@ After running this query, the results were saved to a file named Denton_AD_Final
 ```Eval for Expired Password - simple eval to categorize whether a pwd is expired in a yes/no category```
 | eval pwdStatus = if(PwdLastSet_DaysDiff > 90, "Expired", "Valid")
 
-```Eval for Dormant Users - if the user has not logged on since 30 days from the current date the account is considered Dormant or 'not in use'```
-| eval logonStatus = if(LastLogon_DaysDiff > 90, "Dormant", "Valid")
-
 ```Evaluation of LastLogonDate to Current Date - necessary to see how long it has been since the user last logged in```
 | eval epochDate2=strptime(LastLogonDate, "%m/%d/%Y %H:%M")
 | eval cDate=now()
 | eval cFormat=strftime(cDate,"%m/%d/%Y %H:%M")
 | eval LastLogon_DaysDiff = round((cDate - epochDate2)/86400)
+
+```Eval for Dormant Users - if the user has not logged on since 30 days from the current date the account is considered Dormant or 'not in use'```
+| eval logonStatus = if(LastLogon_DaysDiff > 90, "Dormant", "Valid")
 
 ```Regex to clean timestamp values - necessary to change the format of the time, this helps makes the timestamp look 'prettier'```
 | rex field=LastLogonDate "(?<LastLogonDate>\d{1,2}\/\d{1,2}\/\d{4}) \d{1,2}:\d{2}"
