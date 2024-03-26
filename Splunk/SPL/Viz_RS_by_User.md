@@ -2,7 +2,7 @@
 
 Best represented in circle graph.  Shows the number of users of each overall 'Risk_Score' of 5 - 13 points
 
-# SPL
+# Query
 
 | inputlookup Denton_AD_Final_Set.csv
 | stats count values(identity) by Risk_Score
