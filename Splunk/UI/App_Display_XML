@@ -1,9 +1,16 @@
 # XML code displaying where the Projects's Dashboards & Reports are located in the Denton Insurance Splunk app
 
 <nav search_view="search" color="#5CC05C">
-  <collection label="Denton Insurance (NW Capstone)" >
+  <collection label="Denton Insurance Users (NW Capstone)" >
+    <view name="all_denton_users_clean" />
     <view name="all_denton_users" />
   </collection >
+    <view name="risk_scores" />
+    <view name="privileged_domain_enterprise" />
+    <view name="logons_analysis" />
+    <view name="pwds" />
+    <view name="dashboards" />
     <view name="reports" />
     <view name="search" />
   </nav>
+
