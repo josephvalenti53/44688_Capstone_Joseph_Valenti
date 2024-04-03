@@ -1,0 +1,310 @@
+<form version="1.1" theme="dark">
+  <label>Attribute Tokenizer</label>
+  <description>Select the value in each droplist to see individual risk scores, click the single value metric to review to drill down into individual user data</description>
+  <fieldset submitButton="false"></fieldset>
+  <row>
+    <panel>
+      <title>Title</title>
+      <input type="dropdown" token="title_tok">
+        <label>Select Denton Title</label>
+        <fieldForLabel>Title</fieldForLabel>
+        <fieldForValue>Title</fieldForValue>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| dedup Title
+| table Title
+| sort by Title</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+      </input>
+      <single>
+        <title>$title_tok$ Total Count</title>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| search Title="$title_tok$"
+| stats count</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20inputlookup%20Denton_AD_Final_Set.csv%0D%0A%7C%20search%20Title%3D%22$title_tok$%22%0D%0A%7C%20table%0D%0Aidentity%0D%0ADisplayName%0D%0ATitle%0D%0ADescription%0D%0ADepartment%0D%0AOffice%0D%0ACompany%0D%0ARisk_Socre%0D%0ARS_Enabled%2C%20%0D%0ARS_Privleged%2C%20%0D%0ARS_Email%2C%20%0D%0ARS_Logon_Status%2C%20%0D%0ARS_Pwd_Status%2C%20%0D%0ARS_Enterprise_Admin%2C%20%0D%0ARS_Domain_Admin%2C%0D%0A%7C%20sort%20by%20identity&amp;earliest=@d&amp;latest=now</link>
+        </drilldown>
+      </single>
+    </panel>
+    <panel>
+      <title>Office</title>
+      <input type="dropdown" token="office_tok">
+        <label>Select Denton Office</label>
+        <fieldForLabel>Office</fieldForLabel>
+        <fieldForValue>Office</fieldForValue>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| dedup Office
+| table Office
+| sort by Office</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+      </input>
+      <single>
+        <title>$office_tok$  Total Count</title>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| search Office="$office_tok$"
+| stats count</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">all</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20inputlookup%20Denton_AD_Final_Set.csv%0D%0A%7C%20search%20Office%3D%22$office_tok$%22%0D%0A%7C%20table%0D%0Aidentity%0D%0ADisplayName%0D%0ATitle%0D%0ADescription%0D%0ADepartment%0D%0AOffice%0D%0ACompany%0D%0ARisk_Socre%0D%0ARS_Enabled%2C%20%0D%0ARS_Privleged%2C%20%0D%0ARS_Email%2C%20%0D%0ARS_Logon_Status%2C%20%0D%0ARS_Pwd_Status%2C%20%0D%0ARS_Enterprise_Admin%2C%20%0D%0ARS_Domain_Admin%2C%0D%0A%7C%20sort%20by%20identity&amp;earliest=@d&amp;latest=now</link>
+        </drilldown>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>$title_tok$ Risk Score</title>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| search Title="$title_tok$"
+| stats count values(identity) by Risk_Score, RS_Enabled, RS_Privleged, RS_Email, RS_Logon_Status, RS_Pwd_Status, RS_Enterprise_Admin, RS_Domain_Admin
+| table Risk_Score,count, RS_Enabled, RS_Privleged, RS_Email, RS_Logon_Status, RS_Pwd_Status, RS_Enterprise_Admin, RS_Domain_Admin, 
+| fields - values(identity) 
+| sort by -Risk_Score, count 
+| rename count as Users</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="dataOverlayMode">heatmap</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <format type="color" field="RS_Enabled">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Privleged">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Email">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Logon_Status">
+          <colorPalette type="map">{"2":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Pwd_Status">
+          <colorPalette type="map">{"2":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Enterprise_Admin">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Domain_Admin">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="Risk_Score">
+          <colorPalette type="list">[#118832,#CBA700,#D94E17,#D41F1F,#D41F1F]</colorPalette>
+          <scale type="threshold">3,5,6,100</scale>
+        </format>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>$office_tok$ Risk Score</title>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| search Office="$office_tok$"
+| stats count values(identity) by Risk_Score, RS_Enabled, RS_Privleged, RS_Email, RS_Logon_Status, RS_Pwd_Status, RS_Enterprise_Admin, RS_Domain_Admin 
+| table Risk_Score,count, RS_Enabled, RS_Privleged, RS_Email, RS_Logon_Status, RS_Pwd_Status, RS_Enterprise_Admin, RS_Domain_Admin, 
+| fields - values(identity) 
+| sort by -Risk_Score, count 
+| rename count as Users</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="dataOverlayMode">heatmap</option>
+        <option name="drilldown">none</option>
+        <format type="color" field="RS_Enabled">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Privleged">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Email">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Logon_Status">
+          <colorPalette type="map">{"2":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Pwd_Status">
+          <colorPalette type="map">{"2":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Enterprise_Admin">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Domain_Admin">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="Risk_Score">
+          <colorPalette type="list">[#118832,#CBA700,#D94E17,#D41F1F,#D41F1F]</colorPalette>
+          <scale type="threshold">3,5,6,100</scale>
+        </format>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Department</title>
+      <input type="dropdown" token="department_tok">
+        <label>Denton Department</label>
+        <fieldForLabel>Department</fieldForLabel>
+        <fieldForValue>Department</fieldForValue>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| dedup Department
+| table Department
+| sort by Department</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+      </input>
+      <single>
+        <title>$department_tok$ Total Count</title>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| search Department="$department_tok$"
+| stats count</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20inputlookup%20Denton_AD_Final_Set.csv%0D%0A%7C%20search%20Department%3D%22$department_tok$%22%0D%0A%7C%20table%0D%0Aidentity%0D%0ADisplayName%0D%0ATitle%0D%0ADescription%0D%0ADepartment%0D%0AOffice%0D%0ACompany%0D%0ARisk_Socre%0D%0ARS_Enabled%2C%20%0D%0ARS_Privleged%2C%20%0D%0ARS_Email%2C%20%0D%0ARS_Logon_Status%2C%20%0D%0ARS_Pwd_Status%2C%20%0D%0ARS_Enterprise_Admin%2C%20%0D%0ARS_Domain_Admin%2C%0D%0A%7C%20sort%20by%20identity&amp;earliest=@d&amp;latest=now</link>
+        </drilldown>
+      </single>
+    </panel>
+    <panel>
+      <title>Company</title>
+      <input type="dropdown" token="company_tok">
+        <label>Denton Company</label>
+        <fieldForLabel>Company</fieldForLabel>
+        <fieldForValue>Company</fieldForValue>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| dedup Company
+| table Company
+| sort by Company</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+      </input>
+      <single>
+        <title>$company_tok$ Total Count</title>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| search Company="$company_tok$"
+| stats count</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">all</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20inputlookup%20Denton_AD_Final_Set.csv%0D%0A%7C%20search%20Company%3D%22$company_tok$%22%0D%0A%7C%20table%0D%0Aidentity%0D%0ADisplayName%0D%0ATitle%0D%0ADescription%0D%0ADepartment%0D%0AOffice%0D%0ACompany%0D%0ARisk_Socre%0D%0ARS_Enabled%2C%20%0D%0ARS_Privleged%2C%20%0D%0ARS_Email%2C%20%0D%0ARS_Logon_Status%2C%20%0D%0ARS_Pwd_Status%2C%20%0D%0ARS_Enterprise_Admin%2C%20%0D%0ARS_Domain_Admin%2C%0D%0A%7C%20sort%20by%20identity&amp;earliest=@d&amp;latest=now</link>
+        </drilldown>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>$department_tok$ Risk Score</title>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| search Department="$department_tok$"
+| stats count values(identity) by Risk_Score, RS_Enabled, RS_Privleged, RS_Email, RS_Logon_Status, RS_Pwd_Status, RS_Enterprise_Admin, RS_Domain_Admin 
+| table Risk_Score,count, RS_Enabled, RS_Privleged, RS_Email, RS_Logon_Status, RS_Pwd_Status, RS_Enterprise_Admin, RS_Domain_Admin, 
+| fields - values(identity) 
+| sort by -Risk_Score, count 
+| rename count as Users</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="dataOverlayMode">heatmap</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <format type="color" field="RS_Enabled">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Privleged">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Email">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Logon_Status">
+          <colorPalette type="map">{"2":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Pwd_Status">
+          <colorPalette type="map">{"2":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Enterprise_Admin">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Domain_Admin">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="Risk_Score">
+          <colorPalette type="list">[#118832,#CBA700,#D94E17,#D41F1F,#D41F1F]</colorPalette>
+          <scale type="threshold">3,5,6,100</scale>
+        </format>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>$company_tok$ Risk Score</title>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv
+| search Company="$company_tok$"
+| stats count values(identity) by Risk_Score, RS_Enabled, RS_Privleged, RS_Email, RS_Logon_Status, RS_Pwd_Status, RS_Enterprise_Admin, RS_Domain_Admin 
+| table Risk_Score,count, RS_Enabled, RS_Privleged, RS_Email, RS_Logon_Status, RS_Pwd_Status, RS_Enterprise_Admin, RS_Domain_Admin, 
+| fields - values(identity) 
+| sort by -Risk_Score, count 
+| rename count as Users</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="dataOverlayMode">heatmap</option>
+        <option name="drilldown">none</option>
+        <format type="color" field="RS_Enabled">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Privleged">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Email">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Logon_Status">
+          <colorPalette type="map">{"2":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Pwd_Status">
+          <colorPalette type="map">{"2":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Enterprise_Admin">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="RS_Domain_Admin">
+          <colorPalette type="map">{"1":#D41F1F}</colorPalette>
+        </format>
+        <format type="color" field="Risk_Score">
+          <colorPalette type="list">[#118832,#CBA700,#D94E17,#D41F1F,#D41F1F]</colorPalette>
+          <scale type="threshold">3,5,6,100</scale>
+        </format>
+      </table>
+    </panel>
+  </row>
+</form>
