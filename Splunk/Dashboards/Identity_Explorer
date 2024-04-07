@@ -1,0 +1,52 @@
+<form version="1.1" theme="dark">
+  <label>Denton Identity Explorer</label>
+  <description>Explore &amp; Compare two Denton Account's AD attributes by submitting different usernames in the free-text box</description>
+  <fieldset submitButton="true" autoRun="false">
+    <input type="text" token="username_tok" searchWhenChanged="true">
+      <label>Username1</label>
+    </input>
+    <input type="text" token="username_tok2">
+      <label>Username2</label>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Active Directory (Username1)</title>
+      <table>
+        <title>$username_tok$ Denton AD Attributes</title>
+        <search>
+          <query>| inputlookup denton_AD_users_cleaned.csv
+| search identity="$username_tok$"
+| table *
+| transpose 
+| rename column AS Field, "row 1" as Value</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="count">20</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <format type="color" field="Value">
+          <colorPalette type="map">{"Enabled":#53A051,"Disabled":#DC4E41}</colorPalette>
+        </format>
+      </table>
+    </panel>
+    <panel>
+      <title>Active Direcotry (Username2)</title>
+      <table>
+        <title>$username_tok2$ Denton AD Attributes</title>
+        <search>
+          <query>| inputlookup denton_AD_users_cleaned.csv
+| search identity="$username_tok2$"
+| table *
+| transpose 
+| rename column AS Field, "row 1" as Value</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+</form>
