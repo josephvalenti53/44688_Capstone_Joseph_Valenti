@@ -1,51 +1,56 @@
 <form version="1.1" theme="dark">
   <label>Denton Identity Explorer</label>
   <description>Explore &amp; Compare two Denton Account's AD attributes by submitting different usernames in the free-text box</description>
-  <fieldset submitButton="true" autoRun="false">
-    <input type="text" token="username_tok" searchWhenChanged="true">
-      <label>Username1</label>
-    </input>
-    <input type="text" token="username_tok2">
-      <label>Username2</label>
-    </input>
-  </fieldset>
+  <fieldset submitButton="true" autoRun="false"></fieldset>
   <row>
     <panel>
-      <title>Active Directory (Username1)</title>
+      <title>Active Directory - $username_tok$</title>
+      <input type="text" token="username_tok" searchWhenChanged="true">
+        <label>Username1</label>
+      </input>
       <table>
         <title>$username_tok$ Denton AD Attributes</title>
         <search>
-          <query>| inputlookup denton_AD_users_cleaned.csv
+          <query>| inputlookup Denton_AD_Final_Set.csv
 | search identity="$username_tok$"
 | table *
+| fields - MemberOf
 | transpose 
 | rename column AS Field, "row 1" as Value</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>
-        <option name="count">20</option>
+        <option name="count">80</option>
         <option name="drilldown">none</option>
         <option name="refresh.display">progressbar</option>
         <format type="color" field="Value">
-          <colorPalette type="map">{"Enabled":#53A051,"Disabled":#DC4E41}</colorPalette>
+          <colorPalette type="map">{"Enabled":#118832,"Disabled":#DC4E41,"Valid":#118832}</colorPalette>
         </format>
       </table>
     </panel>
     <panel>
-      <title>Active Direcotry (Username2)</title>
+      <title>Active Directory - $username_tok2$</title>
+      <input type="text" token="username_tok2">
+        <label>Username2</label>
+      </input>
       <table>
         <title>$username_tok2$ Denton AD Attributes</title>
         <search>
-          <query>| inputlookup denton_AD_users_cleaned.csv
+          <query>| inputlookup Denton_AD_Final_Set.csv
 | search identity="$username_tok2$"
 | table *
+| fields - MemberOf
 | transpose 
 | rename column AS Field, "row 1" as Value</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>
+        <option name="count">80</option>
         <option name="drilldown">none</option>
         <option name="refresh.display">progressbar</option>
+        <format type="color" field="Value">
+          <colorPalette type="map">{"Disabled":#D41F1F,"Dormant":#D41F1F,"Expired":#D41F1F}</colorPalette>
+        </format>
       </table>
     </panel>
   </row>
