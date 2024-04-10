@@ -1,0 +1,129 @@
+<dashboard version="1.1" theme="dark">
+  <label>Final Analysis</label>
+  <description>Enabled users in four studied categories</description>
+  <row>
+    <panel>
+      <title>Enabled and PwdExpired</title>
+      <single>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv 
+| search RS_Enabled=1 AND RS_Pwd_Status=2
+| stats count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">all</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20inputlookup%20Denton_AD_Final_Set.csv%20%0A%7C%20search%20RS_Enabled%3D1%20AND%20RS_Pwd_Status%3D2%0A%7C%20table%0Aidentity%0ADisplayName%0ATitle%0AOffice%0ADepartment%0ADescription%0ACompany%0AManager%0AMemberOf%0A%7C%20sort%20by%20identity&amp;earliest=-24h@h&amp;latest=now</link>
+        </drilldown>
+      </single>
+    </panel>
+    <panel>
+      <title>Enabled, Privileged, and Password Expired</title>
+      <single>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv 
+| search RS_Enabled=1 AND RS_Privleged=1 AND RS_Pwd_Status=2
+| stats count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">all</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20inputlookup%20Denton_AD_Final_Set.csv%20%0A%7C%20search%20RS_Enabled%3D1%20AND%20RS_Privleged%3D1%20AND%20RS_Pwd_Status%3D2%0A%7C%20table%0Aidentity%0ADisplayName%0ATitle%0AOffice%0ADepartment%0ADescription%0ACompany%0AManager%0AMemberOf%0A%7C%20sort%20by%20identity&amp;earliest=-24h@h&amp;latest=now</link>
+        </drilldown>
+      </single>
+    </panel>
+    <panel>
+      <title>Enabled and never logged in</title>
+      <single>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv 
+| search RS_Enabled=1 AND NOT LastLogonDate="*"
+| stats count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20inputlookup%20Denton_AD_Final_Set.csv%20%0A%7C%20search%20RS_Enabled%3D1%20AND%20NOT%20LastLogonDate%3D%22*%22%0A%7C%20table%0Aidentity%0ADisplayName%0ATitle%0AOffice%0ADepartment%0ADescription%0ACompany%0AManager%0AMemberOf%0A%7C%20sort%20by%20identity&amp;earliest=-24h@h&amp;latest=now</link>
+        </drilldown>
+      </single>
+    </panel>
+    <panel>
+      <title>Enabled, Domain or Enterprise Admins</title>
+      <single>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv 
+| search RS_Enabled=1 AND RS_Enterprise_Admin=1 OR RS_Domain_Admin=1
+| stats count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">all</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20inputlookup%20Denton_AD_Final_Set.csv%20%0A%7C%20search%20RS_Enabled%3D1%20AND%20RS_Enterprise_Admin%3D1%20OR%20RS_Domain_Admin%3D1%0A%7C%20table%0Aidentity%0ADisplayName%0ATitle%0AOffice%0ADepartment%0ADescription%0ACompany%0AManager%0AMemberOf%0A%7C%20sort%20by%20identity&amp;earliest=-24h@h&amp;latest=now</link>
+        </drilldown>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv 
+| search RS_Enabled=1 AND RS_Pwd_Status=2
+| table identity, DisplayName
+| sort by identity</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv 
+| search RS_Enabled=1 AND RS_Privleged=1 AND RS_Pwd_Status=2
+| table identity, DisplayName
+| sort by identity</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv 
+| search RS_Enabled=1 AND NOT LastLogonDate="*"
+| table identity, DisplayName
+| sort by identity</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <search>
+          <query>| inputlookup Denton_AD_Final_Set.csv 
+| search RS_Enabled=1 AND RS_Enterprise_Admin=1 OR RS_Domain_Admin=1
+| table identity, DisplayName
+| sort by identity</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>
