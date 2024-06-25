@@ -1,4 +1,4 @@
-After running this query, the results were saved to a file named Denton_AD_Final_Set.csv as a lookup file.  As you review the Splunk queries, all SPL starting with | inputlookup Denton_AD_Final_Set.csv is understood to come from this below query.
+After running this query, the results were saved to a file named Denton_AD_Final_Set.csv as a lookup file, notice line-8 states the file is named 'Denton_AD_users.csv', this is the first lookup file created of the _raw data initially gathered from PowerShell, the 'Denton_AD_Final_Set.csv' will be the cleaned identity data.  As you review the Splunk queries, all SPL starting with | inputlookup Denton_AD_Final_Set.csv is understood to come from this below query.
 
 ###Cleanup: The SPL (Search Processing Language) below manipulates the raw, .csv data into meaningful fields with fieldnames more easily understood by the audience.  
 ###Timestamps: The SPL creates additional fields to categorize timestamps and determine whether the age of the timestamps warrants remediation.
