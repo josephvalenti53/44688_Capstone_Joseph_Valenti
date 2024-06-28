@@ -2,7 +2,7 @@
 
 # Welcome! 
 
-Hello, my name is Joseph Valenti, I'm a cybersecurity analyst specializing in Identity & Access Management (IAM), Privileged Access Management (PAM), and Vulnerability Management.  I have a strong love of Splunk, creating my own connections to databases, simply all things manipulating data!  Data is only the fifth form of matter!
+Hello, my name is Joseph Valenti, I'm a cybersecurity analyst specializing in Identity & Access Management (IAM), Privileged Access Management (PAM), and Vulnerability Management.  I have a strong love of Splunk, creating my own connections to databases, simply all things manipulating data aka the fifth form of matter!
 
 # Purpose: 
 
