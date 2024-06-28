@@ -6,11 +6,11 @@ Hello, my name is Joseph Valenti, I'm a cybersecurity analyst specializing in Id
 
 # Purpose: 
 
-This repository aims to assist cybersecurity analysts, identity management admins, and others affiliated in the domain of cybersecurity governance with a streamlined, automated approach to collecting data on their organization's greatest asset, (and greatest risk), their Employees!
+This repository aims to assist cybersecurity analysts, identity management admins, and others affiliated in the domain of cybersecurity governance with a streamlined, automated approach to collecting data on their organization's greatest asset, (and greatest risk), their Employees! (and nonemployee contractors)
 
 We will be exploring a single, fictitious company named Denton Insurance, specifically the account security and vulnerabilities within the company's Microsoft Active Directory.
 
-With this Splunk Enterprise instance, we'll evaluate, hunt in the SPL (search processing language), and create dashboards helpful to executive staff in remediating vulnerabilities, the vulnerabilities discussed include:
+With a Splunk Enterprise instance, we'll evaluate, hunt in the SPL (search/splunk processing language), and create dashboards helpful to executive staff in remediating identity based vulnerabilities, the vulnerabilities discussed include:
 
 - Enabled Users with a password older than 90 days
 - Enabled Privileged Users that have not logged in the domain the last 90 days
@@ -19,7 +19,7 @@ With this Splunk Enterprise instance, we'll evaluate, hunt in the SPL (search pr
 
 # Attributes
 
-This folder explains all AD attributes pulled for each user/identity employed at Denton Insurance, or if a service user (non-human identity) exisiting.  Of these 141 initial attributes, 30 are necessary in evaluating Denton's Identity & Priviliged Access Management governance and risk.  
+This folder explains all AD attributes pulled for each user/identity employed at Denton Insurance.  Of these 141 initial attributes, 30 are necessary in evaluating Denton's Identity & Priviliged Access Management governance and risk.  
 
 # Final Results
 
